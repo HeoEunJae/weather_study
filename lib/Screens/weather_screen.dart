@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timer_builder/timer_builder.dart';
 import 'package:intl/intl.dart';
+import 'package:test_test/model/model.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen(
@@ -14,8 +15,10 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
+  Model model = Model();
   String? cityname;
   int? temp;
+  Widget? icon;
   var date = DateTime.now();
   @override
   void initState() {
@@ -27,7 +30,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
   void updateData(dynamic weatherData) {
     double temp2 = weatherData['main']['temp'];
     temp = temp2.round();
+    int condition = weatherData['weather'][0]['id'];
     cityname = weatherData['name'];
+    icon = model.getWeatherIcon(condition);
   }
 
   String getSystemTime() {
@@ -136,7 +141,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             ),
                             Row(
                               children: [
-                                SvgPicture.asset('svg/climacon-sun.svg'),
+                                // SvgPicture.asset('svg/climacon-sun.svg'),
+                                icon!,
+                                SizedBox(
+                                  width: 10,
+                                ),
                                 Text(
                                   'clear sky',
                                   style: GoogleFonts.lato(
