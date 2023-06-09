@@ -32,15 +32,22 @@ class _LoadingState extends State<Loading> {
     // print(longitude3);
 
     Network network = Network(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude3&lon=$longitude3&appid=$apikey&units=metric'); // api받아오고 {} 란에 api key를 입력
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude3&lon=$longitude3&appid=$apikey&units=metric',
+        'https://api.openweathermap.org/data/2.5/air_pollution?lat=$latitude3&lon=$longitude3&appid=$apikey'); // api받아오고 {} 란에 api key를 입력
 
     var weatherData = await network.getJsonData();
     print(weatherData);
+
+    var airData = await network.getAirData();
+    print(airData);
+
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: ((context) =>
-                WeatherScreen(parseWeatherData: weatherData))));
+            builder: ((context) => WeatherScreen(
+                  parseWeatherData: weatherData,
+                  parseAirPollution: airData,
+                ))));
   }
 
   @override
