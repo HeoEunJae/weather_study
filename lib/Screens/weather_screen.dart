@@ -147,7 +147,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   width: 10,
                                 ),
                                 Text(
-                                  'clear sky',
+                                  'clear sky 시발 안되면 시발좃갓다',
                                   style: GoogleFonts.lato(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
